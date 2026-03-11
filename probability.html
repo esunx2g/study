@@ -12,13 +12,15 @@
     <div class="tistory-post-wrapper">
         <div class="article-topbar">
             <nav class="topic-nav" aria-label="주제 네비게이션">
-                <a href="#section-1">1. 통계적 추론의 출발점</a>
+                <a href="#section-1">1. 통계적 추론</a>
                 <span class="topic-separator">|</span>
-                <a href="#section-2">2. 확률과 확률변수의 수학적 정의</a>
+                <a href="#section-2">2. 확률과 확률변수</a>
                 <span class="topic-separator">|</span>
-                <a href="#section-3">3. 이산 확률 분포 vs 연속 확률 분포</a>
+                <a href="#section-3">3. 확률분포</a>
                 <span class="topic-separator">|</span>
-                <a href="#section-4">4. 조건부 확률과 베이즈 정리</a>
+                <a href="#section-4">4. 기댓값 정리</a>
+                <span class="topic-separator">|</span>
+                <a href="#section-5">5. 우도</a>
             </nav>
         </div>
 
@@ -32,7 +34,7 @@
                 베이즈 정리와 이산형·연속형 확률 분포의 개념까지 한 번에 정리합니다.
             </p>
 
-            <h2 id="section-1" class="section-title">1. 통계적 추론의 출발점</h2>
+            <h2 id="section-1" class="section-title">1. 통계적 추론</h2>
             <p class="body-text">
                 확률론과 통계학의 출발점은 우리가 알고자 하는 전체 집단과 이를 어떤 확률 모형으로 설명할지를 정하는 것입니다.
             </p>
@@ -66,7 +68,7 @@
                 </div>
             </div>
 
-            <h2 id="section-2" class="section-title">2. 확률과 확률변수의 수학적 정의</h2>
+            <h2 id="section-2" class="section-title">2. 확률과 확률변수</h2>
 
             <div class="concept-group">
                 <h3 class="concept-title">표본 공간과 확률</h3>
@@ -107,7 +109,7 @@
                 </p>
             </div>
 
-            <h2 id="section-3" class="section-title">3. 이산 확률 분포 vs 연속 확률 분포</h2>
+            <h2 id="section-3" class="section-title">3. 확률분포</h2>
 
             <div class="concept-group">
                 <h3 class="concept-title">이산 확률 변수 (Discrete)</h3>
@@ -153,53 +155,81 @@
                 </div>
             </div>
 
-            <h2 id="section-4" class="section-title">4. 조건부 확률과 베이즈 정리</h2>
+            <h2 id="section-4" class="section-title">4. 기댓값 정리</h2>
 
             <div class="concept-group">
-                <h3 class="concept-title">조건부 확률 (Conditional Probability)</h3>
+                <h3 class="concept-title">기댓값의 정의</h3>
                 <p class="body-text">
-                    어떤 사건 $B$가 이미 일어났다는 조건하에 다른 사건 $A$가 일어날 확률을 의미합니다.
-                    표본 공간이 전체 $\Omega$에서 $B$로 축소되는 개념으로 이해할 수 있습니다.
+                    기댓값은 확률 분포를 한 숫자로 요약할 때 가장 먼저 보는 대표값입니다.
+                    각 값에 그 값이 나타날 확률을 가중치로 곱해 평균을 내는 개념으로 이해할 수 있습니다.
                 </p>
 
                 <div class="math-box">
                     <div class="math-box-label">FORMULA</div>
                     <div class="math-box-content">
-                        $$P(A \mid B) = \frac{P(A \cap B)}{P(B)} \quad (P(B) > 0)$$
+                        $$\mathbb{E}[X] = \sum_i x_i P(x_i)$$
                     </div>
                 </div>
             </div>
 
             <div class="concept-group">
-                <h3 class="concept-title">베이지안 정리 (Bayesian Theory)</h3>
+                <h3 class="concept-title">연속형과 성질</h3>
                 <p class="body-text">
-                    $P(A \mid B)$를 알고 있을 때 반대 방향의 확률인 $P(B \mid A)$를 계산하기 위해 사용하는 핵심 정리입니다.
+                    연속형 확률변수에서는 합 대신 적분으로 기댓값을 계산합니다.
+                    또한 기댓값은 독립성과 무관하게 선형성이 유지된다는 중요한 성질을 가집니다.
                 </p>
 
                 <div class="math-box">
-                    <div class="math-box-label">BAYES' THEOREM</div>
+                    <div class="math-box-label">PROPERTY</div>
                     <div class="math-box-content">
-                        $$P(B \mid A) = \frac{P(A \mid B)P(B)}{P(A)} \quad (P(A) > 0)$$
+                        $$\mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x)\,dx$$
+                        $$\mathbb{E}[A+B] = \mathbb{E}[A] + \mathbb{E}[B]$$
                     </div>
                 </div>
 
-                <div class="special-block summary">
-                    <span class="special-block-title">베이즈 정리의 구성 요소</span>
-                    <ul class="simple-list">
-                        <li><strong>사전 확률 (Prior, $P(B)$):</strong> 새로운 증거를 보기 전의 확률입니다.</li>
-                        <li><strong>우도 (Likelihood, $P(A \mid B)$):</strong> $B$가 주어졌을 때 $A$가 관측될 가능도입니다.</li>
-                        <li><strong>증거 (Evidence, $P(A)$):</strong> 관측된 사건 $A$가 전체적으로 발생할 확률입니다.</li>
-                        <li><strong>사후 확률 (Posterior, $P(B \mid A)$):</strong> 새로운 증거를 반영한 뒤 갱신된 확률입니다.</li>
-                    </ul>
+                <div class="special-block important">
+                    <span class="special-block-title">선형성</span>
+                    <p>
+                        기댓값은 변수들이 서로 독립이 아니어도 선형성이 성립합니다.
+                        이 성질은 복잡한 문제를 단순화할 때 매우 자주 사용됩니다.
+                    </p>
+                </div>
+            </div>
+
+            <h2 id="section-5" class="section-title">5. 우도</h2>
+
+            <div class="concept-group">
+                <h3 class="concept-title">확률과 우도의 차이</h3>
+                <p class="body-text">
+                    확률은 모수가 정해졌을 때 데이터가 나올 가능성을 설명하고,
+                    우도는 데이터가 고정되었을 때 어떤 모수가 더 그럴듯한지를 비교합니다.
+                </p>
+
+                <div class="math-box">
+                    <div class="math-box-label">LIKELIHOOD</div>
+                    <div class="math-box-content">
+                        $$L(\theta \mid x) = P(x \mid \theta)$$
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-group">
+                <h3 class="concept-title">왜 중요한가</h3>
+                <div class="special-block example">
+                    <span class="special-block-title">직관</span>
+                    <p>
+                        같은 데이터를 두고 여러 모수를 비교했을 때,
+                        그 데이터를 가장 잘 설명하는 모수를 찾는 기준이 바로 우도입니다.
+                    </p>
                 </div>
 
-                <div class="special-block example">
-                    <span class="special-block-title">주사위 예시</span>
-                    <p>
-                        사건 $B$를 짝수, 사건 $A$를 4 이상이라고 두면
-                        $P(B \mid A)$는 4 이상이 나왔을 때 그것이 짝수일 확률로 해석할 수 있습니다.
-                        베이지안 정리는 이런 역방향 확률 계산에 사용됩니다.
-                    </p>
+                <div class="special-block summary">
+                    <span class="special-block-title">활용</span>
+                    <ul class="simple-list">
+                        <li><strong>모수 추정:</strong> 최대우도추정(MLE)의 기본 기준이 됩니다.</li>
+                        <li><strong>모형 비교:</strong> 어떤 가정이 데이터를 더 잘 설명하는지 판단할 수 있습니다.</li>
+                        <li><strong>통계 추론:</strong> 회귀, 분류, 베이지안 추론과도 자연스럽게 연결됩니다.</li>
+                    </ul>
                 </div>
             </div>
         </article>
