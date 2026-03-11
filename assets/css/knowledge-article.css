@@ -110,6 +110,11 @@ p {
     margin-bottom: 1.5rem;
 }
 
+img {
+    max-width: 100%;
+    display: block;
+}
+
 strong,
 b {
     font-weight: 700;
@@ -125,18 +130,115 @@ b {
     overflow-x: auto;
 }
 
-.callout-box {
+.note-block {
     border-left: 4px solid var(--c-black);
     padding-left: 1.25rem;
     margin: 2rem 0;
 }
 
-.callout-title {
+.note-block-title {
     display: block;
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--c-black);
     margin-bottom: 0.5rem;
+}
+
+.note-block.is-important {
+    border-left-color: var(--c-black);
+}
+
+.note-block.is-example {
+    border-left-color: #1d4ed8;
+}
+
+.note-block.is-example .note-block-title {
+    color: #1d4ed8;
+}
+
+.note-block.is-caution {
+    border-left-color: #dc2626;
+}
+
+.note-block.is-caution .note-block-title {
+    color: #dc2626;
+}
+
+.note-list-block {
+    margin: 2rem 0;
+}
+
+.note-list-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--c-black);
+    margin-bottom: 1rem;
+}
+
+.note-list-block .simple-list {
+    margin-bottom: 0;
+}
+
+.article-figure {
+    margin: 2rem 0;
+}
+
+.article-figure img {
+    border: 1px solid var(--c-border);
+    background: #ffffff;
+}
+
+.article-figure figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.92rem;
+    color: var(--c-gray);
+}
+
+.concept-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    margin: 1.5rem 0 2rem;
+}
+
+.concept-summary .article-figure {
+    margin: 0;
+}
+
+.concept-notes {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.compact-math {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    text-align: center;
+}
+
+.compact-list {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.compact-list li {
+    margin-bottom: 0.6rem;
+}
+
+.concept-stack {
+    margin: 1.5rem 0 2rem;
+}
+
+.concept-stack .article-figure {
+    max-width: 540px;
+    margin: 0 auto 1.25rem;
+}
+
+.concept-stack .concept-notes {
+    max-width: 720px;
+    margin: 0 auto;
 }
 
 .simple-list {
@@ -179,5 +281,9 @@ b {
 
     h2 {
         font-size: 1.4rem;
+    }
+
+    .concept-summary {
+        grid-template-columns: 1fr;
     }
 }
