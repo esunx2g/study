@@ -4,8 +4,12 @@
 
 ## 1. 파일 역할
 
+- `index.html`
+  - 문서 목록과 카테고리를 보여 주는 시작 페이지
 - `probability.html`
   - 실제 작성 예시 문서
+- `assets/css/index.css`
+  - 시작 페이지 전용 스타일 정의
 - `assets/css/knowledge-article.css`
   - 공통 스타일 정의
 - `assets/js/knowledge-article.js`
@@ -192,3 +196,4 @@
 - 수식은 꼭 필요한 곳에만 박스로 분리
 - 별첨은 `중요 / 요약 / 예시 / 주의` 네 형식만 사용
 - 새 문서를 만들 때는 이 구조를 그대로 복제하고 내용만 교체
+- 시작 페이지(`index.html`)는 인라인 CSS/JS 없이 `assets` 파일을 참조해 관리
