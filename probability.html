@@ -3,299 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미니멀 지식 아카이브</title>
+    <title>확률 기초</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <link rel="stylesheet" href="assets/css/knowledge-article.css">
 </head>
 <body>
-    <main class="article-container">
+    <div class="tistory-post-wrapper">
         <div class="article-topbar">
             <nav class="topic-nav" aria-label="주제 네비게이션">
-                <a href="#section-1">1. 확률과 확률변수</a>
+                <a href="#section-1">1. 통계적 추론의 출발점</a>
                 <span class="topic-separator">|</span>
-                <a href="#section-2">2. 확률 분포</a>
+                <a href="#section-2">2. 확률과 확률변수의 수학적 정의</a>
                 <span class="topic-separator">|</span>
-                <a href="#section-3">3. 기댓값 정리</a>
+                <a href="#section-3">3. 이산 확률 분포 vs 연속 확률 분포</a>
                 <span class="topic-separator">|</span>
-                <a href="#section-4">4. 우도</a>
+                <a href="#section-4">4. 조건부 확률과 베이즈 정리</a>
             </nav>
         </div>
 
-        <header>
-            <span class="meta-text">Category: Mathematics / Probability / Statistics</span>
-            <h1>확률 기초</h1>
-            <p class="meta-text">작성일: 2026. 03. 12</p>
-        </header>
+        <span class="meta-text">Category: Mathematics / Probability / Statistics</span>
+        <h1 class="post-title">[확률론 기초] 모집단부터 베이즈 정리, 확률 분포까지 완벽 정리</h1>
+        <p class="meta-text">작성일: 2026. 03. 12</p>
 
         <article>
-            <p>
-                확률론을 처음 정리할 때 자주 마주치는 네 가지 축은
-                <strong>확률과 확률변수</strong>, <strong>확률 분포</strong>,
-                <strong>기댓값</strong>, <strong>우도</strong>입니다.
-                이 문서는 그 흐름을 한 번에 이어서 복습할 수 있도록 구성했습니다.
+            <p class="body-text">
+                확률론을 공부하기 위해 가장 먼저 알아야 할 기본 용어들인 모집단, 표본공간, 확률변수부터
+                베이즈 정리와 이산형·연속형 확률 분포의 개념까지 한 번에 정리합니다.
             </p>
 
-            <h2 id="section-1">1. 확률과 확률변수</h2>
-            <p>
-                확률론의 출발점은 전체 대상인 모집단을 어떻게 바라보고, 그 안의 결과를
-                표본공간과 확률변수로 표현하는지 정리하는 데 있습니다.
-                이 관계가 분명해야 이후 분포와 기댓값, 우도까지 자연스럽게 이어집니다.
+            <h2 id="section-1" class="section-title">1. 통계적 추론의 출발점</h2>
+            <p class="body-text">
+                확률론과 통계학의 출발점은 우리가 알고자 하는 전체 집단과 이를 어떤 확률 모형으로 설명할지를 정하는 것입니다.
             </p>
 
-            <h3>① Population (모집단)</h3>
-            <p>
-                모집단은 정보를 얻고자 하는 전체 대상의 집합입니다.
-                실제 문제에서는 모집단 전체를 모두 관측하기 어렵기 때문에,
-                확률 모형은 이 전체 구조를 간단한 규칙으로 표현하려는 시도라고 볼 수 있습니다.
-            </p>
+            <div class="concept-group">
+                <h3 class="concept-title">모집단, 모수, 그리고 생성 모델</h3>
 
-            <h3>② Parameter (모수)</h3>
-            <p>
-                모수는 모집단의 확률 분포 모양을 결정하는 값입니다.
-                실제 상황에서는 이 값을 직접 알 수 없는 경우가 많고,
-                표본과 데이터로부터 추정하게 됩니다.
-            </p>
-
-            <h3>③ Generative Model (생성 모형)</h3>
-            <p>
-                모수가 정해지면 모집단에서 데이터가 생성되는 방식도 함께 정해집니다.
-                이런 관점에서 확률 모델은 데이터를 만들어 내는 규칙을 가정한 것이라고 볼 수 있습니다.
-            </p>
-
-            <h3>④ Sample Space (표본공간)</h3>
-            <p>
-                표본공간은 무작위 실험에서 나올 수 있는 모든 가능한 결과의 집합입니다.
-                보통 $\Omega$로 표기합니다.
-            </p>
-            <div class="math-box">
-                $\Omega = \{1,2,3,4,5,6\}$
-            </div>
-
-            <h3>⑤ Probability (확률)</h3>
-            <p>
-                확률은 사건이 일어날 가능성을 수치로 표현한 값입니다.
-                예를 들어 주사위를 던질 때 짝수가 나오는 사건 $A=\{2,4,6\}$에 대해
-                확률은 다음과 같이 쓸 수 있습니다.
-            </p>
-            <div class="math-box">
-                $P(A)=\frac{3}{6}=\frac{1}{2}$
-            </div>
-
-            <h3>⑥ Random Variable (확률변수)</h3>
-            <p>
-                확률변수는 표본공간의 결과를 숫자에 대응시키는 함수입니다.
-                확률적 결과를 계산 가능한 형태로 바꾸는 연결 고리라고 보면 됩니다.
-            </p>
-            <p>
-                주사위 눈 자체를 확률변수 $X$로 두면, $X$는 1부터 6까지의 값을 가집니다.
-            </p>
-
-            <div class="note-block is-example">
-                <span class="note-block-title">예시</span>
-                <p style="margin-bottom: 0;">
-                    동전을 한 번 던져 앞면이면 1, 뒷면이면 0이 되도록 확률변수 $X$를 정의할 수 있습니다.
-                    이렇게 결과를 숫자로 바꾸면 이후 분포와 기댓값을 계산할 수 있습니다.
+                <h4 class="point-title">모집단 (Population)</h4>
+                <p class="body-text">
+                    모집단은 정보를 얻고자 하는 전체 대상의 집합입니다.
+                    현실에서는 그 크기가 매우 크거나 무한해서 전체를 직접 아는 것이 보통 어렵습니다.
                 </p>
-            </div>
 
-            <div class="note-block is-important">
-                <span class="note-block-title">중요 포인트</span>
-                <p style="margin-bottom: 0;">
-                    확률변수는 단순한 숫자가 아니라, 표본공간의 결과를 수치적으로 다루기 위해 정의한 함수입니다.
+                <h4 class="point-title">모수 (Parameter)</h4>
+                <p class="body-text">
+                    모수는 모집단의 확률 분포 형태를 결정하는 값입니다.
+                    실제 분석에서는 직접 관찰하기보다 데이터를 통해 추정합니다.
                 </p>
-            </div>
 
-            <h2 id="section-2">2. 확률 분포</h2>
-            <p>
-                확률 분포는 확률변수가 어떤 값을 얼마나 자주 가질 수 있는지를 체계적으로 설명하는 규칙입니다.
-                이산형과 연속형을 구분해 두면 PMF, CDF, PDF 같은 개념도 훨씬 명확해집니다.
-            </p>
+                <h4 class="point-title">생성 모델 (Generative Model)</h4>
+                <p class="body-text">
+                    생성 모델은 모수가 주어졌을 때 데이터가 어떤 확률 법칙에 따라 생성되는지를 설명하는 틀입니다.
+                </p>
 
-            <h3>① 이산형 확률변수</h3>
-            <p>
-                이산형 확률변수는 셀 수 있는 값을 갖는 확률변수입니다.
-                주사위 눈, 동전의 앞뒷면, 시험의 정답 개수처럼 값이 분리되어 있습니다.
-            </p>
-            <ul>
-                <li>- 가능한 값이 떨어져 있으며 셀 수 있습니다.</li>
-                <li>- 보통 $X \in \{x_1, x_2, x_3, \dots\}$처럼 표현합니다.</li>
-            </ul>
-
-            <h3>② 이산형 확률 분포</h3>
-            <p>
-                이산형 확률 분포는 각 값에 대응하는 확률을 직접 나열하는 방식으로 표현합니다.
-            </p>
-
-            <h3>③ PMF</h3>
-            <p>
-                PMF는 Probability Mass Function의 약자로, 이산형 확률변수의 각 값에 대한 확률을 나타냅니다.
-            </p>
-            <div class="concept-stack">
-                <figure class="article-figure">
-                    <img src="images/pmf.png" alt="PMF graph example">
-                    <figcaption>주사위 눈 1부터 6까지에 대한 PMF 예시</figcaption>
-                </figure>
-                <div class="concept-notes">
-                    <div class="math-box compact-math">
-                        $p_X(x)=P(X=x), \qquad \sum_x p_X(x)=1$
-                    </div>
-                    <ul class="compact-list">
-                        <li>- 각 확률은 0 이상 1 이하입니다.</li>
-                        <li>- 모든 값의 확률을 더하면 1입니다.</li>
-                        <li>- 구간 확률은 해당 값들의 확률을 더해서 계산합니다.</li>
-                    </ul>
+                <div class="special-block important">
+                    <span class="special-block-title">실제 분석의 방향</span>
+                    <p>
+                        실제 문제에서는 모집단 전체를 볼 수 없기 때문에, 표본을 통해 모수를 추정하고
+                        자연의 분포를 잘 근사하는 생성 모델을 세우는 방향으로 분석을 진행합니다.
+                    </p>
                 </div>
             </div>
 
-            <h3>④ CMF</h3>
-            <p>
-                CMF는 누적된 확률을 나타내는 함수로, 어떤 값 이하가 될 확률을 보여 줍니다.
-            </p>
-            <div class="concept-stack">
-                <figure class="article-figure">
-                    <img src="images/cmf.png" alt="CMF graph example">
-                    <figcaption>이산형 분포에서의 CMF 예시</figcaption>
-                </figure>
-                <div class="concept-notes">
-                    <div class="math-box compact-math">
-                        $F_X(x)=P(X \le x)$
-                    </div>
-                    <ul class="compact-list">
-                        <li>- 왼쪽 끝에서는 0에 가깝고 오른쪽으로 갈수록 1에 가까워집니다.</li>
-                        <li>- 값이 커질수록 감소하지 않는 함수입니다.</li>
-                    </ul>
+            <h2 id="section-2" class="section-title">2. 확률과 확률변수의 수학적 정의</h2>
+
+            <div class="concept-group">
+                <h3 class="concept-title">표본 공간과 확률</h3>
+                <p class="body-text">
+                    <strong>표본 공간(Sample Space, $\Omega$)</strong>은 무작위 실험에서 나올 수 있는 모든 가능한 결과의 집합이며,
+                    <strong>확률(Probability, $P$)</strong>은 특정 사건이 일어날 가능성을 수치로 표현한 것입니다.
+                </p>
+
+                <div class="special-block example">
+                    <span class="special-block-title">주사위</span>
+                    <p>
+                        표본 공간은 $\Omega = \{1, 2, 3, 4, 5, 6\}$ 이고,
+                        짝수가 나올 사건 $A = \{2, 4, 6\}$의 확률은 $P(A) = \frac{3}{6} = \frac{1}{2}$ 입니다.
+                    </p>
                 </div>
             </div>
 
-            <div class="note-block is-important">
-                <span class="note-block-title">중요 포인트</span>
-                <p style="margin-bottom: 0;">
-                    PMF는 점별 확률, CMF는 그 확률을 누적한 결과입니다.
-                    두 함수는 같은 분포를 다른 관점에서 보여 줍니다.
+            <div class="concept-group">
+                <h3 class="concept-title">확률 변수와 확률 분포</h3>
+
+                <h4 class="point-title">확률 변수</h4>
+                <p class="body-text">
+                    <strong>확률 변수(Random Variable, $X$)</strong>는 표본 공간의 각 결과에 실수 값을 대응시키는 함수입니다.
+                    확률적인 결과를 계산 가능한 형태로 바꿔 주는 역할을 합니다.
+                </p>
+
+                <div class="math-box">
+                    <div class="math-box-label">DEFINITION</div>
+                    <div class="math-box-content">
+                        $$X : \Omega \rightarrow \mathbb{R}$$
+                    </div>
+                </div>
+
+                <h4 class="point-title">확률 분포</h4>
+                <p class="body-text">
+                    <strong>확률 분포(Probability Distribution)</strong>는 확률 변수가 어떤 값을 가질지에 대한 확률 규칙입니다.
+                    즉, 가능한 값과 그 값이 나타날 확률을 연결해 주는 구조입니다.
                 </p>
             </div>
 
-            <h3>⑤ 연속형 확률변수</h3>
-            <p>
-                연속형 확률변수는 어떤 구간 안에서 연속적으로 값을 가질 수 있는 확률변수입니다.
-                시간, 길이, 온도처럼 측정값을 다룰 때 자주 등장합니다.
-            </p>
-            <ul>
-                <li>- 값이 끊기지 않고 이어집니다.</li>
-                <li>- 보통 특정 한 점의 확률보다 구간의 확률을 계산합니다.</li>
-            </ul>
+            <h2 id="section-3" class="section-title">3. 이산 확률 분포 vs 연속 확률 분포</h2>
 
-            <h3>⑥ 연속형 확률 분포</h3>
-            <p>
-                연속형 확률 분포에서는 특정 값 하나의 확률을 직접 주기보다,
-                밀도 함수를 통해 구간의 확률을 계산합니다.
-            </p>
+            <div class="concept-group">
+                <h3 class="concept-title">이산 확률 변수 (Discrete)</h3>
+                <p class="body-text">
+                    확률 변수 $X$가 취할 수 있는 값이 딱딱 끊어져 있는 경우를 말합니다.
+                    이때의 확률 분포는 <strong>확률 질량 함수(PMF)</strong>로 표현합니다.
+                </p>
 
-            <h3>⑦ PDF</h3>
-            <p>
-                PDF는 Probability Density Function의 약자로, 연속형 확률변수의 확률 밀도를 나타냅니다.
-            </p>
-            <div class="concept-stack">
-                <figure class="article-figure">
-                    <img src="images/pdf.png" alt="PDF graph example">
-                    <figcaption>연속형 분포에서의 PDF 예시</figcaption>
-                </figure>
-                <div class="concept-notes">
-                    <div class="math-box compact-math">
-                        $P(a \le X \le b)=\int_a^b f_X(x)\,dx$
+                <div class="math-box">
+                    <div class="math-box-label">PMF PROPERTY</div>
+                    <div class="math-box-content">
+                        $$p_X(x)=P(X=x), \qquad \sum_x p_X(x)=1$$
                     </div>
-                    <ul class="compact-list">
-                        <li>- 밀도 함수 값 자체가 확률은 아닙니다.</li>
-                        <li>- 전체 구간에서 적분하면 1이 됩니다.</li>
-                    </ul>
+                </div>
+
+                <h4 class="point-title">누적 질량 함수 (CMF)</h4>
+                <p class="body-text">
+                    특정 값보다 작거나 같은 확률을 모두 더한 함수를 $F_X(x)=P(X \le x)$로 정의합니다.
+                </p>
+            </div>
+
+            <div class="concept-group">
+                <h3 class="concept-title">연속 확률 변수 (Continuous)</h3>
+                <p class="body-text">
+                    확률 변수 $X \in \mathbb{R}$로, 취할 수 있는 값이 연속적인 경우입니다.
+                    이때는 특정한 한 점에서의 확률 대신 <strong>확률 밀도 함수(PDF)</strong>와 구간 적분으로 확률을 해석합니다.
+                </p>
+
+                <div class="math-box">
+                    <div class="math-box-label">PDF &amp; CDF</div>
+                    <div class="math-box-content">
+                        $$\int_{-\infty}^{\infty} f_X(x)dx = 1$$
+                        $$P(a \le X \le b) = \int_a^b f_X(x)dx$$
+                    </div>
+                </div>
+
+                <div class="special-block caution">
+                    <span class="special-block-title">PDF의 함숫값은 확률 아닙니다</span>
+                    <p>
+                        연속 확률 분포에서는 $f_X(x)$의 값 자체가 확률을 의미하지 않습니다.
+                        확률은 반드시 구간의 넓이, 즉 적분값으로 계산해야 합니다.
+                    </p>
                 </div>
             </div>
 
-            <h3>⑧ CDF</h3>
-            <p>
-                CDF는 어떤 값 이하가 될 누적 확률을 나타내는 함수입니다.
-                연속형 분포에서도 동일하게 사용할 수 있습니다.
-            </p>
-            <div class="concept-stack">
-                <figure class="article-figure">
-                    <img src="images/cdf.png" alt="CDF graph example">
-                    <figcaption>연속형 분포에서의 CDF 예시</figcaption>
-                </figure>
-                <div class="concept-notes">
-                    <div class="math-box compact-math">
-                        $F_X(x)=P(X \le x)=\int_{-\infty}^{x} f_X(t)\,dt$
+            <h2 id="section-4" class="section-title">4. 조건부 확률과 베이즈 정리</h2>
+
+            <div class="concept-group">
+                <h3 class="concept-title">조건부 확률 (Conditional Probability)</h3>
+                <p class="body-text">
+                    어떤 사건 $B$가 이미 일어났다는 조건하에 다른 사건 $A$가 일어날 확률을 의미합니다.
+                    표본 공간이 전체 $\Omega$에서 $B$로 축소되는 개념으로 이해할 수 있습니다.
+                </p>
+
+                <div class="math-box">
+                    <div class="math-box-label">FORMULA</div>
+                    <div class="math-box-content">
+                        $$P(A \mid B) = \frac{P(A \cap B)}{P(B)} \quad (P(B) > 0)$$
                     </div>
-                    <ul class="compact-list">
-                        <li>- $F_X(-\infty)=0$이고 $F_X(\infty)=1$입니다.</li>
-                        <li>- PDF를 적분하면 CDF가 됩니다.</li>
-                    </ul>
                 </div>
             </div>
 
-            <div class="note-block is-caution">
-                <span class="note-block-title">주의</span>
-                <p style="margin-bottom: 0;">
-                    연속형 확률변수에서는 특정 한 점에서의 확률을 직접 해석하지 않습니다.
-                    보통 $P(X=a)=0$으로 두고, 실제 확률은 구간 적분으로 계산합니다.
+            <div class="concept-group">
+                <h3 class="concept-title">베이지안 정리 (Bayesian Theory)</h3>
+                <p class="body-text">
+                    $P(A \mid B)$를 알고 있을 때 반대 방향의 확률인 $P(B \mid A)$를 계산하기 위해 사용하는 핵심 정리입니다.
                 </p>
+
+                <div class="math-box">
+                    <div class="math-box-label">BAYES' THEOREM</div>
+                    <div class="math-box-content">
+                        $$P(B \mid A) = \frac{P(A \mid B)P(B)}{P(A)} \quad (P(A) > 0)$$
+                    </div>
+                </div>
+
+                <div class="special-block summary">
+                    <span class="special-block-title">베이즈 정리의 구성 요소</span>
+                    <ul class="simple-list">
+                        <li><strong>사전 확률 (Prior, $P(B)$):</strong> 새로운 증거를 보기 전의 확률입니다.</li>
+                        <li><strong>우도 (Likelihood, $P(A \mid B)$):</strong> $B$가 주어졌을 때 $A$가 관측될 가능도입니다.</li>
+                        <li><strong>증거 (Evidence, $P(A)$):</strong> 관측된 사건 $A$가 전체적으로 발생할 확률입니다.</li>
+                        <li><strong>사후 확률 (Posterior, $P(B \mid A)$):</strong> 새로운 증거를 반영한 뒤 갱신된 확률입니다.</li>
+                    </ul>
+                </div>
+
+                <div class="special-block example">
+                    <span class="special-block-title">주사위 예시</span>
+                    <p>
+                        사건 $B$를 짝수, 사건 $A$를 4 이상이라고 두면
+                        $P(B \mid A)$는 4 이상이 나왔을 때 그것이 짝수일 확률로 해석할 수 있습니다.
+                        베이지안 정리는 이런 역방향 확률 계산에 사용됩니다.
+                    </p>
+                </div>
             </div>
-
-            <h2 id="section-3">3. 기댓값 정리</h2>
-            <p>
-                기댓값은 확률 분포의 중심 경향을 요약하는 대표적인 값입니다.
-                단순 평균처럼 보이지만 각 값에 확률을 가중치로 곱한다는 점에서 확률론적 의미를 가집니다.
-            </p>
-
-            <h3>① 계산식</h3>
-            <p>이산형 분포에서는 다음과 같이 계산합니다.</p>
-            <div class="math-box">
-                $\mathbb{E}[X] = \sum_{i} x_i P(x_i)$
-            </div>
-
-            <p>연속형 분포에서는 다음과 같이 적분합니다.</p>
-            <div class="math-box">
-                $\mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x)\,dx$
-            </div>
-
-            <h3>② 중요한 성질</h3>
-            <div class="note-block is-important">
-                <span class="note-block-title">중요 포인트</span>
-                <p style="margin-bottom: 0;">
-                    변수들이 서로 독립이 아니더라도 $\mathbb{E}[A+B] = \mathbb{E}[A] + \mathbb{E}[B]$는 성립합니다.
-                    이 선형성은 복잡한 확률 문제를 단순화할 때 매우 자주 사용됩니다.
-                </p>
-            </div>
-
-            <h2 id="section-4">4. 우도</h2>
-            <p>
-                우도는 주어진 데이터가 특정 모수 아래에서 얼마나 그럴듯하게 관측되는지를 나타내는 개념입니다.
-                확률과 비슷해 보이지만, 데이터를 고정하고 모수를 바꿔 가며 평가한다는 점이 핵심 차이입니다.
-            </p>
-
-            <h3>① 확률과 우도의 차이</h3>
-            <p>
-                확률은 모수가 주어졌을 때 데이터가 나올 가능성을 말합니다.
-                반대로 우도는 이미 관측된 데이터를 기준으로 어떤 모수가 더 적합한지를 비교하는 도구입니다.
-            </p>
-
-            <div class="math-box">
-                $L(\theta \mid x) = P(x \mid \theta)$
-            </div>
-
-            <h3>② 왜 중요한가</h3>
-            <ul class="simple-list">
-                <li><strong>모수 추정:</strong> 최대우도추정(MLE)의 핵심 기준이 됩니다.</li>
-                <li><strong>모형 비교:</strong> 어떤 가정이 데이터를 더 잘 설명하는지 판단할 수 있습니다.</li>
-                <li><strong>통계 추론:</strong> 회귀, 분류, 베이지안 추론과도 깊게 연결됩니다.</li>
-            </ul>
         </article>
 
-        <footer class="footer">
-            문서 끝.
-        </footer>
-    </main>
+        <footer class="footer">문서 끝.</footer>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script src="assets/js/knowledge-article.js"></script>
 </body>
 </html>
