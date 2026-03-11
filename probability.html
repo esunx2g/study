@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미니멀 지식 아카이브</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="assets/css/knowledge-article.css">
+</head>
+<body>
+    <main class="article-container">
+        <div class="article-topbar">
+            <nav class="topic-nav" aria-label="주제 네비게이션">
+                <a href="#section-1">1. 확률과 확률변수</a>
+                <span class="topic-separator">|</span>
+                <a href="#section-2">2. 확률 분포</a>
+                <span class="topic-separator">|</span>
+                <a href="#section-3">3. 기댓값 정리</a>
+                <span class="topic-separator">|</span>
+                <a href="#section-4">4. 우도</a>
+            </nav>
+        </div>
+
+        <header>
+            <span class="meta-text">Category: Mathematics / Probability / Statistics</span>
+            <h1>확률 기초</h1>
+            <p class="meta-text">작성일: 2026. 03. 12</p>
+        </header>
+
+        <article>
+            <p>
+                확률론을 처음 정리할 때 자주 마주치는 네 가지 축은
+                <strong>확률과 확률변수</strong>, <strong>확률 분포</strong>,
+                <strong>기댓값</strong>, <strong>우도</strong>입니다.
+                이 문서는 그 흐름을 한 번에 이어서 복습할 수 있도록 구성했습니다.
+            </p>
+
+            <h2 id="section-1">1. 확률과 확률변수</h2>
+            <p>
+                확률은 어떤 사건이 일어날 가능성을 수치로 표현한 것입니다. 확률변수는
+                표본공간의 결과를 숫자에 대응시키는 함수이며, 이후 분포와 기댓값을 정의하는
+                출발점이 됩니다.
+            </p>
+
+            <h3>핵심 개념</h3>
+            <p>
+                사건의 확률을 해석하려면 먼저 표본공간, 사건, 확률변수의 관계를 분명히 해야 합니다.
+                확률변수는 이산형일 수도 있고 연속형일 수도 있으며, 이 차이가 이후 분포 표현 방식을 결정합니다.
+            </p>
+
+            <h4>기본 표현</h4>
+            <p>
+                보통 확률은 $P(A)$처럼 표기하고, 확률변수는 $X, Y$ 같은 대문자로 나타냅니다.
+                확률변수가 특정 값을 가질 가능성을 다루는 과정이 확률 분포로 이어집니다.
+            </p>
+
+            <div class="callout-box">
+                <span class="callout-title">정리 포인트</span>
+                <p style="margin-bottom: 0;">
+                    확률변수는 단순한 숫자가 아니라, 확률적 결과를 수치적으로 다루기 위한 함수라는 점이 중요합니다.
+                </p>
+            </div>
+
+            <h2 id="section-2">2. 확률 분포</h2>
+            <p>
+                확률 분포는 확률변수가 어떤 값을 얼마나 자주 가질 수 있는지를 체계적으로 설명합니다.
+                분포를 이해하면 평균, 분산, 사건 확률 같은 다양한 통계량을 계산할 수 있습니다.
+            </p>
+
+            <h3>이산형과 연속형</h3>
+            <p>
+                이산형 확률변수는 확률질량함수(PMF)로, 연속형 확률변수는 확률밀도함수(PDF)로 표현합니다.
+                누적된 확률을 확인할 때는 누적분포함수(CDF)를 사용합니다.
+            </p>
+
+            <h4>이산형 분포</h4>
+            <div class="math-box">
+                $P(X = x_i)$
+            </div>
+
+            <h4>연속형 분포</h4>
+            <div class="math-box">
+                $P(a \le X \le b) = \int_a^b f(x)\,dx$
+            </div>
+
+            <h3>대표적인 분포 예시</h3>
+            <ol class="simple-list">
+                <li><strong>베르누이 분포:</strong> 성공과 실패처럼 두 결과만 갖는 실험을 모델링합니다.</li>
+                <li><strong>이항 분포:</strong> 베르누이 시행을 여러 번 반복했을 때 성공 횟수를 다룹니다.</li>
+                <li><strong>정규 분포:</strong> 자연 현상과 통계 추론에서 가장 자주 등장하는 연속형 분포입니다.</li>
+            </ol>
+
+            <h2 id="section-3">3. 기댓값 정리</h2>
+            <p>
+                기댓값은 확률 분포의 중심 경향을 요약하는 대표적인 수치입니다. 단순 평균과 비슷해 보이지만,
+                각 값에 해당 확률을 가중치로 반영한다는 점에서 확률론적 의미를 가집니다.
+            </p>
+
+            <h3>계산식</h3>
+            <h4>이산형 분포</h4>
+            <div class="math-box">
+                $\mathbb{E}[X] = \sum_{i} x_i P(x_i)$
+            </div>
+
+            <h4>연속형 분포</h4>
+            <div class="math-box">
+                $\mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x)\,dx$
+            </div>
+
+            <h3>중요한 성질</h3>
+            <div class="callout-box">
+                <span class="callout-title">기댓값의 선형성</span>
+                <p style="margin-bottom: 0;">
+                    변수들이 서로 독립이 아니더라도 $\mathbb{E}[A+B] = \mathbb{E}[A] + \mathbb{E}[B]$가 성립합니다.
+                    이 성질은 복잡한 확률 문제를 단순화할 때 매우 자주 사용됩니다.
+                </p>
+            </div>
+
+            <h2 id="section-4">4. 우도</h2>
+            <p>
+                우도는 주어진 데이터가 특정 모수 아래에서 얼마나 그럴듯하게 관측되는지를 나타내는 개념입니다.
+                확률과 비슷해 보이지만, 데이터는 고정하고 모수를 바꿔가며 평가한다는 점에서 방향이 다릅니다.
+            </p>
+
+            <h3>확률과 우도의 차이</h3>
+            <p>
+                확률은 모수가 주어졌을 때 데이터가 나올 가능성을 말하고, 우도는 관측된 데이터를 기준으로
+                어떤 모수가 더 적합한지를 비교하는 도구입니다.
+            </p>
+
+            <div class="math-box">
+                $L(\theta \mid x) = P(x \mid \theta)$
+            </div>
+
+            <h3>왜 중요한가</h3>
+            <ol class="simple-list">
+                <li><strong>모수 추정:</strong> 최대우도추정(MLE)의 핵심 기준이 됩니다.</li>
+                <li><strong>모형 비교:</strong> 어떤 가정이 데이터를 더 잘 설명하는지 판단할 수 있습니다.</li>
+                <li><strong>통계 추론:</strong> 회귀, 분류, 베이지안 추론과도 깊게 연결됩니다.</li>
+            </ol>
+        </article>
+
+        <footer class="footer">
+            문서 끝.
+        </footer>
+    </main>
+
+    <script src="assets/js/knowledge-article.js"></script>
+</body>
+</html>
