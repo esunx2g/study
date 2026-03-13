@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -37,13 +37,12 @@
 
                 <article>
                     <p class="body-text">
-                        확률론을 공부하기 위해 가장 먼저 알아야 할 기본 용어들인 모집단, 표본공간, 확률변수부터
-                        베이즈 정리와 이산형·연속형 확률 분포의 개념까지 한 번에 정리합니다.
+                        확률, 통계의 기본 개념부터 베이즈 정리, 그리고 생성 모델의 개념까지 논리적 흐름에 따라 정리한 문서
                     </p>
 
                     <h2 id="section-1" class="section-title">1. 통계적 추론</h2>
                     <p class="body-text">
-                        확률론과 통계학의 출발점은 우리가 알고자 하는 전체 집단과 이를 어떤 확률 모형으로 설명할지를 정하는 것입니다.
+                        확률론과 통계학의 출발점: 알고자 하는 전체 집단을 정하고, 이를 어떤 확률 모형으로 설명할지 결정.
                     </p>
 
                     <div class="concept-group">
@@ -51,26 +50,26 @@
 
                         <h4 class="point-title">모집단 (Population)</h4>
                         <p class="body-text">
-                            모집단은 정보를 얻고자 하는 전체 대상의 집합입니다.
-                            현실에서는 그 크기가 매우 크거나 무한해서 전체를 직접 아는 것이 보통 어렵습니다.
+                            모집단: 정보를 얻고자 하는 전체 대상의 집합.
+                            현실에서는 크기가 매우 크거나 무한한 경우가 많아 전체를 직접 파악하기는 어려움.
                         </p>
 
                         <h4 class="point-title">모수 (Parameter)</h4>
                         <p class="body-text">
-                            모수는 모집단의 확률 분포 형태를 결정하는 값입니다.
-                            실제 분석에서는 직접 관찰하기보다 데이터를 통해 추정합니다.
+                            모수: 모집단의 확률 분포 형태를 결정하는 값.
+                            실제 분석에서는 직접 관찰보다 데이터 기반 추정이 일반적.
                         </p>
 
                         <h4 class="point-title">생성 모델 (Generative Model)</h4>
                         <p class="body-text">
-                            생성 모델은 모수가 주어졌을 때 데이터가 어떤 확률 법칙에 따라 생성되는지를 설명하는 틀입니다.
+                            생성 모델: 모수가 주어졌을 때 데이터가 어떤 확률 법칙에 따라 생성되는지 설명하는 틀.
                         </p>
 
                         <div class="special-block important">
                             <span class="special-block-title">실제 분석의 방향</span>
                             <p>
-                                실제 문제에서는 모집단 전체를 볼 수 없기 때문에, 표본을 통해 모수를 추정하고
-                                자연의 분포를 잘 근사하는 생성 모델을 세우는 방향으로 분석을 진행합니다.
+                                실제 문제에서는 모집단 전체 관찰이 어렵기 때문에, 표본을 통해 모수 추정.
+                                이어서 자연의 분포를 잘 근사하는 생성 모델 설정.
                             </p>
                         </div>
                     </div>
@@ -80,15 +79,15 @@
                     <div class="concept-group">
                         <h3 class="concept-title">표본 공간과 확률</h3>
                         <p class="body-text">
-                            <strong>표본 공간(Sample Space, $\Omega$)</strong>은 무작위 실험에서 나올 수 있는 모든 가능한 결과의 집합이며,
-                            <strong>확률(Probability, $P$)</strong>은 특정 사건이 일어날 가능성을 수치로 표현한 것입니다.
+                            <strong>표본 공간(Sample Space, $\Omega$)</strong>: 무작위 실험에서 나올 수 있는 모든 가능한 결과의 집합.
+                            <strong>확률(Probability, $P$)</strong>: 특정 사건이 일어날 가능성을 수치로 표현한 값.
                         </p>
 
                         <div class="special-block example">
                             <span class="special-block-title">주사위</span>
                             <p>
                                 표본 공간은 $\Omega = \{1, 2, 3, 4, 5, 6\}$ 이고,
-                                짝수가 나올 사건 $A = \{2, 4, 6\}$의 확률은 $P(A) = \frac{3}{6} = \frac{1}{2}$ 입니다.
+                                짝수가 나올 사건 $A = \{2, 4, 6\}$의 확률은 $P(A) = \frac{3}{6} = \frac{1}{2}$.
                             </p>
                         </div>
                     </div>
@@ -98,8 +97,8 @@
 
                         <h4 class="point-title">확률 변수</h4>
                         <p class="body-text">
-                            <strong>확률 변수(Random Variable, $X$)</strong>는 표본 공간의 각 결과에 실수 값을 대응시키는 함수입니다.
-                            확률적인 결과를 계산 가능한 형태로 바꿔 주는 역할을 합니다.
+                            <strong>확률 변수(Random Variable, $X$)</strong>: 표본 공간의 각 결과에 실수 값을 대응시키는 함수.
+                            확률적 결과를 계산 가능한 형태로 바꾸는 역할.
                         </p>
 
                         <div class="math-box">
@@ -111,8 +110,8 @@
 
                         <h4 class="point-title">확률 분포</h4>
                         <p class="body-text">
-                            <strong>확률 분포(Probability Distribution)</strong>는 확률 변수가 어떤 값을 가질지에 대한 확률 규칙입니다.
-                            즉, 가능한 값과 그 값이 나타날 확률을 연결해 주는 구조입니다.
+                            <strong>확률 분포(Probability Distribution)</strong>: 확률 변수가 어떤 값을 가질지에 대한 확률 규칙.
+                            가능한 값과 그 값이 나타날 확률을 연결하는 구조.
                         </p>
                     </div>
 
@@ -121,8 +120,8 @@
                     <div class="concept-group">
                         <h3 class="concept-title">이산 확률 변수 (Discrete)</h3>
                         <p class="body-text">
-                            확률 변수 $X$가 취할 수 있는 값이 딱딱 끊어져 있는 경우를 말합니다.
-                            이때의 확률 분포는 <strong>확률 질량 함수(PMF)</strong>로 표현합니다.
+                            확률 변수 $X$가 취할 수 있는 값이 끊어져 있는 경우.
+                            이때의 확률 분포는 <strong>확률 질량 함수(PMF)</strong>로 표현.
                         </p>
 
                         <div class="math-box">
@@ -134,15 +133,16 @@
 
                         <h4 class="point-title">누적 질량 함수 (CMF)</h4>
                         <p class="body-text">
-                            특정 값보다 작거나 같은 확률을 모두 더한 함수를 $F_X(x)=P(X \le x)$로 정의합니다.
+                            특정 값보다 작거나 같은 확률을 모두 더한 함수.
+                            정의: $F_X(x)=P(X \le x)$.
                         </p>
                     </div>
 
                     <div class="concept-group">
                         <h3 class="concept-title">연속 확률 변수 (Continuous)</h3>
                         <p class="body-text">
-                            확률 변수 $X \in \mathbb{R}$로, 취할 수 있는 값이 연속적인 경우입니다.
-                            이때는 특정한 한 점에서의 확률 대신 <strong>확률 밀도 함수(PDF)</strong>와 구간 적분으로 확률을 해석합니다.
+                            확률 변수 $X \in \mathbb{R}$로, 취할 수 있는 값이 연속적인 경우.
+                            특정한 한 점에서의 확률 대신 <strong>확률 밀도 함수(PDF)</strong>와 구간 적분으로 확률 해석.
                         </p>
 
                         <div class="math-box">
@@ -156,8 +156,8 @@
                         <div class="special-block caution">
                             <span class="special-block-title">PDF의 함숫값은 확률 아닙니다</span>
                             <p>
-                                연속 확률 분포에서는 $f_X(x)$의 값 자체가 확률을 의미하지 않습니다.
-                                확률은 반드시 구간의 넓이, 즉 적분값으로 계산해야 합니다.
+                                연속 확률 분포에서 $f_X(x)$의 값 자체는 확률이 아님.
+                                확률 계산 기준은 구간의 넓이, 즉 적분값.
                             </p>
                         </div>
                     </div>
@@ -167,8 +167,8 @@
                     <div class="concept-group">
                         <h3 class="concept-title">기댓값의 정의</h3>
                         <p class="body-text">
-                            기댓값은 확률 분포를 한 숫자로 요약할 때 가장 먼저 보는 대표값입니다.
-                            각 값에 그 값이 나타날 확률을 가중치로 곱해 평균을 내는 개념으로 이해할 수 있습니다.
+                            기댓값: 확률 분포를 하나의 숫자로 요약할 때 가장 먼저 보는 대표값.
+                            각 값에 해당 확률을 가중치로 곱해 평균을 내는 개념.
                         </p>
 
                         <div class="math-box">
@@ -182,8 +182,8 @@
                     <div class="concept-group">
                         <h3 class="concept-title">연속형과 성질</h3>
                         <p class="body-text">
-                            연속형 확률변수에서는 합 대신 적분으로 기댓값을 계산합니다.
-                            또한 기댓값은 독립성과 무관하게 선형성이 유지된다는 중요한 성질을 가집니다.
+                            연속형 확률변수에서는 합 대신 적분으로 기댓값 계산.
+                            또한 독립성과 무관하게 선형성이 유지된다는 점이 핵심.
                         </p>
 
                         <div class="math-box">
@@ -197,8 +197,8 @@
                         <div class="special-block important">
                             <span class="special-block-title">선형성</span>
                             <p>
-                                기댓값은 변수들이 서로 독립이 아니어도 선형성이 성립합니다.
-                                이 성질은 복잡한 문제를 단순화할 때 매우 자주 사용됩니다.
+                                기댓값은 변수들이 서로 독립이 아니어도 선형성 성립.
+                                복잡한 문제를 단순화할 때 매우 자주 사용.
                             </p>
                         </div>
                     </div>
@@ -208,8 +208,8 @@
                     <div class="concept-group">
                         <h3 class="concept-title">확률과 우도의 차이</h3>
                         <p class="body-text">
-                            확률은 모수가 정해졌을 때 데이터가 나올 가능성을 설명하고,
-                            우도는 데이터가 고정되었을 때 어떤 모수가 더 그럴듯한지를 비교합니다.
+                            확률: 모수가 정해졌을 때 데이터가 나올 가능성 설명.
+                            우도: 데이터가 고정되었을 때 어떤 모수가 더 그럴듯한지 비교.
                         </p>
 
                         <div class="math-box">
@@ -225,17 +225,17 @@
                         <div class="special-block example">
                             <span class="special-block-title">직관</span>
                             <p>
-                                같은 데이터를 두고 여러 모수를 비교했을 때,
-                                그 데이터를 가장 잘 설명하는 모수를 찾는 기준이 바로 우도입니다.
+                                같은 데이터를 두고 여러 모수를 비교할 때,
+                                그 데이터를 가장 잘 설명하는 모수를 찾는 기준이 바로 우도.
                             </p>
                         </div>
 
                         <div class="special-block summary">
                             <span class="special-block-title">활용</span>
                             <ul class="simple-list">
-                                <li><strong>모수 추정:</strong> 최대우도추정(MLE)의 기본 기준이 됩니다.</li>
-                                <li><strong>모형 비교:</strong> 어떤 가정이 데이터를 더 잘 설명하는지 판단할 수 있습니다.</li>
-                                <li><strong>통계 추론:</strong> 회귀, 분류, 베이지안 추론과도 자연스럽게 연결됩니다.</li>
+                                <li><strong>모수 추정:</strong> 최대우도추정(MLE)의 기본 기준.</li>
+                                <li><strong>모형 비교:</strong> 어떤 가정이 데이터를 더 잘 설명하는지 판단.</li>
+                                <li><strong>통계 추론:</strong> 회귀, 분류, 베이지안 추론과 자연스럽게 연결.</li>
                             </ul>
                         </div>
                     </div>
