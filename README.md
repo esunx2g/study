@@ -8,12 +8,16 @@
   - 문서 목록과 카테고리를 보여 주는 시작 페이지
 - `probability.html`
   - 실제 작성 예시 문서
+- `article-template.html`
+  - 새 문서를 만들 때 글자만 바꿔 넣으면 되는 기본 껍데기 파일
 - `assets/css/index.css`
   - 시작 페이지 전용 스타일 정의
+- `assets/css/common-hero.css`
+  - `index.html`과 문서 페이지가 함께 쓰는 상단 배너 공통 스타일
 - `assets/css/knowledge-article.css`
-  - 공통 스타일 정의
+  - 문서 본문, 좌측 문서 목록, 상단 섹션 네비 스타일 정의
 - `assets/js/knowledge-article.js`
-  - KaTeX 수식 렌더링 스크립트
+  - KaTeX 수식 렌더링, 현재 문서 활성화, 현재 섹션 활성화 처리
 
 ## 2. 문단 우선순위
 
@@ -41,45 +45,66 @@
   - 소주제
 - `p.body-text`
   - 일반 본문
+- `.article-layout`
+  - 좌측 문서 목록과 본문 2열 레이아웃
+- `.article-sidebar`
+  - 좌측 문서 제목 목록
+- `.sidebar-nav`, `.sidebar-link`
+  - 다른 문서 제목 링크
+- `.sidebar-group`, `.sidebar-group-title`
+  - 카테고리형 문서 묶음과 소제목
+- `.topic-nav`
+  - 현재 문서 내부 섹션 이동 네비
 
 ## 4. 레이아웃 규칙
 
-- 최상위 래퍼는 `.tistory-post-wrapper` 또는 `.article-container` 사용
+- 문서 페이지는 기본적으로 `.article-layout` 안에서 `sidebar + main` 구조를 사용한다.
+- 좌측 사이드바는 현재 문서의 `Concept`나 `Section` 목록이 아니라, 다른 문서 제목 목록을 둔다.
+- 좌측 문서 목록은 `index.html`과 같은 카테고리 구조를 따른다.
+- 카테고리 예시는 `확률론 및 통계학 / 선형 대수학 / 미적분학 / 논문`이다.
+- 현재 문서 안의 섹션 이동은 상단 `.topic-nav`에서 처리한다.
+- 본문은 `.tistory-post-wrapper` 또는 `.article-container` 사용
 - 문서 폭은 지나치게 넓지 않게 유지
 - 본문은 무채색 기반, 선명한 검정 제목, 연한 회색 경계선 중심으로 정리
+- 전폭 배너가 들어가는 문서는 최상단 공백 없이 바로 시작되게 한다
+- 동일한 배너를 여러 페이지가 쓰면 `assets/css/common-hero.css`에서 공통 관리한다
+- 좌측 문서 목록은 데스크톱에서만 보이고, 모바일에서는 숨긴다
 
 ## 5. HTML 기본 골격
 
 ```html
-<div class="tistory-post-wrapper">
-    <h1 class="post-title">[확률론 기초] 모집단부터 베이즈 정리까지 정리</h1>
-
-    <p class="body-text">
-        도입 문단...
-    </p>
-
-    <h2 class="section-title">1. 통계적 추론의 출발점</h2>
-    <p class="body-text">
-        섹션 설명...
-    </p>
-
-    <h3 class="concept-title">모집단, 모수, 그리고 생성 모델</h3>
-    <div class="special-block summary">
-        <span class="special-block-title">주요 용어 정의</span>
-        <ul>
-            <li>항목...</li>
-        </ul>
-    </div>
-
-    <h4 class="point-title">확률 변수</h4>
-    <p class="body-text">설명 문단...</p>
-
-    <div class="math-box">
-        <div class="math-box-label">DEFINITION</div>
-        <div class="math-box-content">
-            $$X : \Omega \rightarrow \mathbb{R}$$
+<div class="article-layout">
+    <aside class="article-sidebar">
+        <div class="sidebar-inner">
+            <div class="sidebar-label">Documents</div>
+            <h2 class="sidebar-title">문서 카테고리</h2>
+            <nav class="sidebar-nav">
+                <a class="sidebar-link" data-doc-link href="index.html">홈</a>
+                <div class="sidebar-group">
+                    <div class="sidebar-group-title">확률론 및 통계학</div>
+                    <a class="sidebar-link" data-doc-link href="probability.html">확률 기초</a>
+                </div>
+            </nav>
         </div>
-    </div>
+    </aside>
+
+    <main class="article-main">
+        <div class="tistory-post-wrapper">
+            <div class="article-topbar">
+                <nav class="topic-nav">
+                    <a href="#section-1">1. 첫 번째 섹션</a>
+                </nav>
+            </div>
+
+            <h1 class="post-title">문서 제목</h1>
+            <p class="body-text">도입 문단...</p>
+
+            <h2 id="section-1" class="section-title">1. 첫 번째 섹션</h2>
+            <h3 class="concept-title">Concept 제목</h3>
+            <h4 class="point-title">Point 제목</h4>
+            <p class="body-text">설명 문단...</p>
+        </div>
+    </main>
 </div>
 ```
 
@@ -87,10 +112,7 @@
 
 - `Section`은 숫자 구조를 직접 제목에 포함한다.
 - 제목 아래에는 얇지 않은 진한 가로 구분선을 둔다.
-- 예:
-  - `1. 통계적 추론의 출발점`
-  - `2. 확률과 확률변수의 수학적 정의`
-  - `3. 이산 확률 분포 vs 연속 확률 분포`
+- 상단 섹션 네비와 연결하려면 모든 `Section`은 고유한 `id`를 가져야 한다.
 
 ## 7. Concept 규칙
 
@@ -104,96 +126,31 @@
 - 보통 `h4.point-title` 뒤에 `p.body-text`가 이어진다.
 - 앞에는 작은 점 기호가 자동으로 붙는다.
 
-예:
-
-```html
-<h4 class="point-title">누적 질량 함수 (CMF)</h4>
-<p class="body-text">
-    특정 값보다 작거나 같은 확률을 모두 더한 함수입니다.
-</p>
-```
-
 ## 9. 수식 규칙
 
-수식은 인라인 수식과 블록 수식으로 나눈다.
-
-### 인라인 수식
-
-- 표기: `$...$`
-- 예: `$P(A)$`
-
-### 블록 수식
-
-- 표기: `$$...$$`
-- `.math-box` 안에 배치
-- 라벨은 `.math-box-label`
-- 실제 식은 `.math-box-content`
-
-예:
-
-```html
-<div class="math-box">
-    <div class="math-box-label">FORMULA</div>
-    <div class="math-box-content">
-        $$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
-    </div>
-</div>
-```
-
-원칙:
-
-- 블록 수식은 흰 배경 + 연한 회색 테두리 + 라벨 구조 사용
-- 과한 색상 장식은 피하고, 정의/정리/성질처럼 독립된 식만 박스로 분리
+- 인라인 수식은 `$...$`
+- 블록 수식은 `$$...$$`
+- 블록 수식은 `.math-box`, `.math-box-label`, `.math-box-content` 구조를 사용한다
 
 ## 10. 별첨 규칙
 
-별첨 블록은 아래 네 종류만 사용한다.
-
-### 1. 중요
-
-- class: `.special-block important`
-- 목적: 반드시 기억해야 할 핵심 메시지 강조
-- 표시: `◆ 중요)`
-
-### 2. 요약
-
-- class: `.special-block summary`
-- 목적: 정의, 구성 요소, 요약 정리
-- 표시: `☰ 요약)`
-
-### 3. 예시
-
-- class: `.special-block example`
-- 목적: 직관적 상황, 계산 예시, 적용 사례 설명
-- 표시: `✎ 예시)`
-
-### 4. 주의
-
-- class: `.special-block caution`
-- 목적: 오해하기 쉬운 부분, 예외, 해석상 주의 전달
-- 표시: `⚠ 주의)`
-
-공통 규칙:
-
-- 제목은 `.special-block-title`
-- 둥근 박스 + 좌측 두꺼운 강조선 구조 사용
-- `Concept`보다 더 강한 시각 구분을 가져도 됨
+- `중요`: `.special-block.important`
+- `요약`: `.special-block.summary`
+- `예시`: `.special-block.example`
+- `주의`: `.special-block.caution`
 
 ## 11. JS 규칙
 
 - 수식 렌더링은 `assets/js/knowledge-article.js`에서 처리
-- `renderMathInElement(document.body, ...)` 사용
-- 구분자는 아래 두 개만 허용
-  - `$$...$$`
-  - `$...$`
+- `.sidebar-nav a[data-doc-link]`는 현재 열려 있는 문서 파일명과 맞춰 `.is-active`를 토글한다
+- `.topic-nav a`는 현재 섹션에 맞춰 `.is-active`를 토글한다
 
 ## 12. 작성 원칙
 
 - 장식보다 정보 전달 우선
 - 제목 위계가 한눈에 보여야 함
 - `Section`, `Concept`, `Point`의 역할이 섞이지 않게 유지
-- `Section`과 `Section` 사이는 넉넉한 상단 여백으로 강하게 구분
-- 수식은 꼭 필요한 곳에만 박스로 분리
-- 별첨은 `중요 / 요약 / 예시 / 주의` 네 형식만 사용
-- 새 문서를 만들 때는 이 구조를 그대로 복제하고 내용만 교체
+- 새 문서를 만들 때는 템플릿을 복제하고 텍스트만 교체
+- 긴 문서는 좌측 문서 목록 + 상단 섹션 네비 구조를 기본으로 둔다
 - 시작 페이지(`index.html`)는 인라인 CSS/JS 없이 `assets` 파일을 참조해 관리
+- 공통 UI는 페이지별 CSS에 중복 정의하지 말고 공용 CSS로 분리한다

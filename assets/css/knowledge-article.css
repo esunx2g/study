@@ -1,5 +1,111 @@
 ﻿@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.article-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 1.25rem 2rem;
+}
+
+.article-sidebar {
+    width: 240px;
+    flex: 0 0 240px;
+    padding-top: 2rem;
+}
+
+.sidebar-inner {
+    position: sticky;
+    top: 1.5rem;
+    border-right: 1px solid #e5e7eb;
+    padding-right: 1.25rem;
+}
+
+.sidebar-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 0.45rem;
+}
+
+.sidebar-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    color: #111111;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-top: 0.65rem;
+}
+
+.sidebar-group + .sidebar-group {
+    margin-top: 0.35rem;
+}
+
+.sidebar-group-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #111111;
+    padding: 0 0.65rem 0.35rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-link {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    padding: 0.45rem 0.65rem;
+    border-left: 2px solid transparent;
+    transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.sidebar-group .sidebar-link {
+    font-size: 0.94rem;
+}
+
+.sidebar-link:hover,
+.sidebar-link:focus-visible {
+    color: #111111;
+    background-color: #f8fafc;
+    border-color: #d1d5db;
+    transform: translateX(2px);
+}
+
+.sidebar-link.is-active {
+    color: #111111;
+    font-weight: 700;
+    background-color: #f8fafc;
+    border-color: #111111;
+}
+
+.article-main {
+    min-width: 0;
+    flex: 1;
+}
+
 .tistory-post-wrapper,
 .article-container {
     font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -8,9 +114,15 @@
     line-height: 1.7;
     letter-spacing: -0.01em;
     word-break: keep-all;
-    max-width: 800px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 0 1rem 2rem;
+}
+
+.article-layout .hero-banner {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .article-topbar {
@@ -41,13 +153,18 @@
     transform: translateY(-1px);
 }
 
+.topic-nav a.is-active {
+    color: #111111;
+    font-weight: 700;
+}
+
 .topic-separator {
     color: #c7c7c7;
 }
 
 .tistory-post-wrapper h1.post-title,
 .article-container h1.post-title {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     font-weight: 800;
     color: #111111;
     margin-bottom: 3rem;
@@ -257,12 +374,24 @@
     font-size: 0.9rem;
 }
 
-@media (max-width: 640px) {
-    .tistory-post-wrapper,
-    .article-container {
-        padding: 1.5rem 1rem;
+@media (max-width: 1100px) {
+    .article-layout {
+        display: block;
+        padding: 0 1rem 1.5rem;
     }
 
+    .article-sidebar {
+        display: none;
+    }
+
+    .tistory-post-wrapper,
+    .article-container {
+        max-width: 880px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 640px) {
     .article-topbar,
     .topic-nav {
         justify-content: flex-start;
@@ -270,7 +399,7 @@
 
     .tistory-post-wrapper h1.post-title,
     .article-container h1.post-title {
-        font-size: 1.85rem;
+        font-size: 2.1rem;
     }
 
     .tistory-post-wrapper h2.section-title,
