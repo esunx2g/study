@@ -222,6 +222,17 @@ body {
     margin-top: 0;
     margin-bottom: 1.5rem;
     text-align: justify;
+    padding-left: 10px;
+}
+
+.tistory-post-wrapper p .katex,
+.article-container p .katex {
+    font-size: 1.08em;
+}
+
+.tistory-post-wrapper p .katex .mfrac,
+.article-container p .katex .mfrac {
+    font-size: 1.35em;
 }
 
 .meta-text {
@@ -282,7 +293,7 @@ body {
 
 .special-block p {
     margin: 0;
-    line-height: 1.6;
+    line-height: 2;
     color: #374151;
 }
 

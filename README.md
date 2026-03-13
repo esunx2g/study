@@ -50,7 +50,7 @@
 - `h4.point-title`
   - 소주제
 - `p.body-text`
-  - 일반 본문
+  - 일반 본문, 문단 전체 왼쪽 10px 여백 적용
 - `.article-layout`
   - 좌측 문서 목록과 본문 2열 레이아웃
 - `.article-sidebar`
@@ -152,6 +152,7 @@
 
 - `Point`는 `Concept` 아래의 세부 소주제다.
 - 보통 `h4.point-title` 뒤에 `p.body-text`가 이어진다.
+- `p.body-text`는 기본적으로 문단 전체에 `padding-left: 10px;`가 적용된다.
 - 앞에는 작은 점 기호가 자동으로 붙는다.
 
 ## 10. 수식 규칙
@@ -159,6 +160,7 @@
 - 인라인 수식은 `$...$`
 - 블록 수식은 `$$...$$`
 - 블록 수식은 `.math-box`, `.math-box-label`, `.math-box-content` 구조를 사용한다.
+- 본문 문장 안의 KaTeX 인라인 수식은 약간 크게 표시하고, 분수는 추가로 더 키워 가독성을 맞춘다.
 - KaTeX 렌더링을 위해 문서 페이지에는 KaTeX CSS/JS와 `assets/js/knowledge-article.js`를 함께 포함한다.
 
 ## 11. 별첨 규칙
