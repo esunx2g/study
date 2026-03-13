@@ -119,12 +119,6 @@ body {
     padding: 0 1rem 2rem;
 }
 
-.article-layout .hero-banner {
-    width: auto;
-    margin-left: 0;
-    margin-right: 0;
-}
-
 .article-topbar {
     display: flex;
     justify-content: flex-end;
