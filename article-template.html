@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -11,45 +11,14 @@
 </head>
 <body>
     <div class="article-layout">
-        <aside class="article-sidebar" aria-label="문서 목록">
-            <div class="sidebar-inner">
-                <div class="sidebar-label">Documents</div>
-                <h2 class="sidebar-title">문서 카테고리</h2>
-                <nav class="sidebar-nav">
-                    <a class="sidebar-link" data-doc-link href="index.html">홈</a>
-
-                    <div class="sidebar-group">
-                        <div class="sidebar-group-title">확률론 및 통계학</div>
-                        <a class="sidebar-link" data-doc-link href="probability.html">확률 기초</a>
-                        <a class="sidebar-link" data-doc-link href="new-probability-article.html">새 확률 문서</a>
-                    </div>
-
-                    <div class="sidebar-group">
-                        <div class="sidebar-group-title">선형 대수학</div>
-                        <a class="sidebar-link" data-doc-link href="linear-algebra-basics.html">선형대수 문서</a>
-                    </div>
-
-                    <div class="sidebar-group">
-                        <div class="sidebar-group-title">미적분학</div>
-                        <a class="sidebar-link" data-doc-link href="calculus-article.html">미적분 문서</a>
-                    </div>
-
-                    <div class="sidebar-group">
-                        <div class="sidebar-group-title">논문</div>
-                        <a class="sidebar-link" data-doc-link href="paper-review.html">논문 문서</a>
-                    </div>
-                </nav>
-            </div>
-        </aside>
+        <aside class="article-sidebar" aria-label="문서 목록" data-include="partials/article-sidebar.html"></aside>
 
         <main class="article-main">
             <div class="tistory-post-wrapper">
-                <header class="hero-banner">
-                    <div class="hero-content">
-                        <h1 class="hero-title">Math &amp; Stats Archive</h1>
-                        <p class="hero-subtitle">문서 성격에 맞는 한 줄 설명</p>
-                    </div>
-                </header>
+                <div
+                    data-include="partials/hero-banner.html"
+                    data-hero-subtitle="문서 성격에 맞는 한 줄 설명"
+                ></div>
 
                 <div class="article-topbar">
                     <nav class="topic-nav" aria-label="주제 네비게이션">
@@ -170,6 +139,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="assets/js/site-shell.js"></script>
     <script src="assets/js/knowledge-article.js"></script>
 </body>
 </html>
