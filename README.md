@@ -123,9 +123,11 @@
                     <p class="body-text">도입 문단...</p>
 
                     <h2 id="section-1" class="section-title">1. 첫 번째 섹션</h2>
-                    <h3 class="concept-title">Concept 제목</h3>
-                    <h4 class="point-title">Point 제목</h4>
-                    <p class="body-text">설명 문단...</p>
+                    <div class="concept-group">
+                        <h3 class="concept-title">Concept 제목</h3>
+                        <h4 class="point-title">Point 제목</h4>
+                        <p class="body-text">설명 문단...</p>
+                    </div>
                 </article>
             </div>
         </main>
@@ -145,8 +147,10 @@
 ## 8. Concept 규칙
 
 - `Concept`는 `Section` 아래에서 개념 묶음을 구분하는 중주제다.
+- 각 `Concept`는 반드시 `.concept-group`으로 감싼다.
 - 보통 짧은 제목 한 줄과 이어지는 본문, 수식, 별첨 블록으로 구성한다.
 - 별도 박스 래퍼 없이도 흐름이 읽히도록 `h3.concept-title` 자체의 시각적 구분을 사용한다.
+- 같은 `Section` 안에서 다음 `Concept`가 이어질 때는 이전 `Concept`보다 더 큰 세로 간격을 둬 개념 경계를 분명히 한다.
 
 ## 9. Point 규칙
 
@@ -160,6 +164,7 @@
 - 인라인 수식은 `$...$`
 - 블록 수식은 `$$...$$`
 - 블록 수식은 `.math-box`, `.math-box-label`, `.math-box-content` 구조를 사용한다.
+- 수식 자체는 `.math-box-content--formula`로 가운데 정렬하고, 같은 박스 안의 설명문은 `.math-box-content--body`로 좌측 정렬한다.
 - 본문 문장 안의 KaTeX 인라인 수식은 약간 크게 표시하고, 분수는 추가로 더 키워 가독성을 맞춘다.
 - KaTeX 렌더링을 위해 문서 페이지에는 KaTeX CSS/JS와 `assets/js/knowledge-article.js`를 함께 포함한다.
 
@@ -175,6 +180,8 @@
 - `assets/js/site-shell.js`는 `data-include`가 붙은 요소를 찾아 partial을 불러온다.
 - `assets/js/site-shell.js`는 `.sidebar-nav a[data-doc-link]`에 현재 문서 기준 `.is-active`를 토글한다.
 - `assets/js/knowledge-article.js`는 수식 렌더링과 `.topic-nav a`의 현재 섹션 활성화를 담당한다.
+- `assets/js/knowledge-article.js`는 `.math-box-content`를 formula/body 역할에 맞게 정리하고, 혼합 박스에는 `data-math-box-layout="mixed"`를 부여한다.
+- `assets/js/knowledge-article.js`는 각 `Section` 아래의 `.concept-group`에 `data-concept-index`를 부여해 concept 간격 기준을 맞춘다.
 - 문서 페이지에서는 `site-shell.js`를 `knowledge-article.js`보다 먼저 불러온다.
 
 ## 13. 작성 원칙
