@@ -1,0 +1,556 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>확률 기초</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="assets/css/common-hero.css">
+    <link rel="stylesheet" href="assets/css/knowledge-article.css">
+</head>
+<body>
+    <div data-include="partials/hero-banner.html"></div>
+
+    <div class="article-layout">
+        <aside class="article-sidebar" aria-label="문서 목록" data-include="partials/article-sidebar.html"></aside>
+
+        <main class="article-main">
+            <div class="tistory-post-wrapper">
+                <div class="article-topbar">
+                    <nav class="topic-nav" aria-label="주제 네비게이션">
+                        <a href="#section-1">1. 통계적 추론</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-2">2. 확률과 확률변수</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-3">3. 확률분포</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-4">4. 기댓값 정리</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-5">5. 우도</a>
+                    </nav>
+                </div>
+
+                <span class="meta-text">Category: Mathematics / Probability / Statistics</span>
+                <h1 class="post-title">확률 기초</h1>
+                <p class="meta-text">작성일: 2026. 03. 12</p>
+
+                <article>
+                    <p class="body-text">
+                        확률, 통계의 기본 개념부터 베이즈 정리, 그리고 생성 모델의 개념까지 논리적 흐름에 따라 정리한 문서임.
+                    </p>
+
+                    <h2 id="section-1" class="section-title">1. 통계적 추론</h2>
+                    <p class="body-text">
+                        확률론과 통계학의 출발점은 알고자 하는 전체 집단을 정하고, 이를 어떤 확률 모형으로 설명할지 결정하는 것임.
+                    </p>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">모집단, 모수, 그리고 생성 모델</h3>
+
+                        <h4 class="point-title">모집단 (Population)</h4>
+                        <p class="body-text">
+                            정보를 얻고자 하는 전체 대상의 집합. → 보통 알 수 없음<br>
+                            ex) 주사위를 무한히 던졌을 때 나오는 모든 결과
+                        </p>
+                        
+
+                        <h4 class="point-title">모수 (Parameter)</h4>
+                        <p class="body-text">
+                            모집단의 확률 분포 형태를 결정하는 값. → 보통 알 수 없음
+                        </p>
+
+                        <h4 class="point-title">생성 모델 (Generative Model)</h4>
+                        <p class="body-text">
+                            모수가 주어졌을 때 데이터가 어떤 확률 법칙에 따라 생성되는지 설명하는 틀임.<br>
+                            - 1. 모수가 정해지면 모집단의 확률 분포가 완전히 결정됨.<br>
+                            - 2. 분포를 알면 모집단과 동일한 확률 법칙을 따르는 데이터를 무한히 생성할 수 있음.<br>
+                            - 3. 따라서 생성 모델은 자연의 모집단 확률 분포를 잘 근사하도록 분포의 모수를 학습함.<br>
+                        </p>
+
+                        <div class="special-block important">
+                            <span class="special-block-title">실제 분석의 방향</span>
+                            <p>
+                                현실에서는 전체 데이터를 다 알 수 없기 때문에 일부 표본을 이용하여 전체의 성질을 추측하고 설명하는 모델을 만듦.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 id="section-2" class="section-title">2. 확률</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">표본 공간과 확률</h3>
+
+                        <h4 class="point-title">표본 공간 (Sample Space)</h4>
+                        <p class="body-text">
+                            무작위 실험에서 나올 수 있는 모든 가능한 결과의 집합.<br>
+                            표기 : $\Omega$<br>
+                        </p>
+
+                        <h4 class="point-title">확률 (Probability, $P$)</h4>
+                        <p class="body-text">
+                            특정 사건이 일어날 가능성을 수치로 표현한 값.<br>
+                            표기 : $P(A)$<br>
+                        </p>
+
+                        <div class="special-block example">
+                            <span class="special-block-title">주사위</span>
+                            <p>
+                                표본 공간 $\Omega = \{1, 2, 3, 4, 5, 6\}$<br>
+                                짝수가 나올 사건 $A = \{2, 4, 6\}$<br>
+                                확률 $P(A) = \frac{3}{6} = \frac{1}{2}$<br>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">조건부 확률과 베이즈 정리</h3>
+
+                        <h4 class="point-title">조건부 확률 (Conditional Probability)</h4>
+                        <p class="body-text">
+                            어떤 사건 $B$가 일어났다는 조건 하에, 다른 사건 $A$가 일어날 확률임.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">FORMULA</div>
+                            <div class="math-box-content">
+                                $$P(A \mid B) = \frac{P(A \cap B)}{P(B)} \quad (\text{단, } P(B) > 0)$$
+                            </div>
+                        </div>
+
+                        <h4 class="point-title">베이지안 정리 (Bayes' Theorem)</h4>
+                        <p class="body-text"> 
+                            확률 $P(A \mid B)$를 알고 있을 때 $P(B \mid A)$를 계산하기 위한 정리임.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">BAYES' THEOREM</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$P(B \mid A) = \frac{P(A \mid B)P(B)}{P(A)} \quad (P(A) > 0)$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                prior Probability $P(B)$ : 사건 B가 발생할 확률<br>
+                                likelihood $P(A \mid B)$ : 사건 B가 발생했을 때 사건 A가 발생할 확률<br>
+                                evidence $P(A)$ : 사건 A가 발생할 확률<br>
+                                posterior Probability $P(B \mid A)$ : 사건 A가 발생했을 때 사건 B가 발생할 확률
+                            </div>
+                        </div>
+
+                        <div class="special-block example">
+                            <span class="special-block-title">주사위</span>
+                            <p>
+                                사건 $A$ = "4 이상": $A = \{4,5,6\}$<br>
+                                사건 $B$ = "짝수": $B = \{2,4,6\}$<br>
+                                $\therefore\; P(A \mid B) = \frac{2/6}{3/6} = \frac{2}{3}$<br>
+                                $\therefore\; P(B \mid A) = \frac{P(A \mid B)P(B)}{P(A)} = \frac{2/3 \,\cdot\, 3/6}{3/6} = \frac{2}{3}$<br>
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 id="section-3" class="section-title">3. 확률 변수와 확률 분포</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">확률 변수</h3>
+
+                        <h4 class="point-title">확률 변수 (Random Variable)</h4>
+                        <p class="body-text">
+                            표본 공간의 각 결과에 실수 값을 대응시키는 함수임.<br>
+                            확률적 결과를 계산 가능한 형태로 바꾸는 역할을 함.<br>
+                            표기 : $X : \Omega \rightarrow \mathbb{R}$
+                        </p>
+
+                        <h4 class="point-title">확률 분포(Probability Distribution)</h4>
+                        <p class="body-text"> 
+                            모수로 결정되는 확률 규칙임.<br>
+                            확률 변수가 어떤 값을 가질지에 대한 확률 규칙임.<br>
+                            가능한 값과 그 값이 나타날 확률을 연결하는 구조임.<br>
+                            표기 : $P_X(B) = P(X \in B)$<br>
+                        </p>
+
+                        <div class="special-block example">
+                            <span class="special-block-title">주사위</span>
+                            <p>
+                                확률 변수 $X = \{1, 2, 3, 4, 5, 6\}$ 중 하나의 값<br>
+                                확률 분포 $P(X=x) = \frac{1}{6}$<br>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">이산형 (Discrete)</h3>
+                        <p class="body-text">
+                            이산 확률 변수 : 이산적인 값
+                            $$X \in \{x_1, x_2, x_3, \cdots\}$$
+                            이산 확률 분포 : 확률 질량 함수(PMF)
+                            $$p_X(x)=P(X=x)  →  \sum_x p_X(x)=1$$
+                            확률 : <strong style="color: #2563eb;">확률 질량 함수의 y 값</strong>
+                            $$P(a \le X \le b) = \sum_{x=a}^{b} p_X(x)$$
+                        </p>
+
+                        <h4 class="point-title">PMF (Probability Mass Function)</h4>
+                        <p class="body-text">
+                            이산 확률 변수의 분포(확률)를 나타내는 함수가 $p_X(x)$임.<br>
+                            $P(X=x_i) = p_X(x_i), \qquad (i=1,2,\dots,n)$
+                        </p>
+
+                        <h4 class="point-title">CMF (Cumulative Mass Function)</h4>
+                        <p class="body-text">
+                            이산형 분포에서 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수가 $F_X(x)$임.<br>
+                            $F_X(x) = P(X \le x)$
+                        </p>
+
+                        <div class="concept-image-grid">
+                            <figure class="concept-figure">
+                                <img src="images/pmf.png" alt="PMF graph example">
+                                <figcaption>주사위의 각 눈의 확률값에 대한 PMF graph</figcaption>
+                                <div class="concept-figure-copy">
+                                    <span class="concept-figure-formula">- $0 \le p_X(x_i) \le 1$</span>
+                                    <span class="concept-figure-formula">- $\sum_{i=1}^{n} p_X(x_i)=1$</span>
+                                    <span class="concept-figure-formula">- $P(x_i \le X \le x_j)=\sum_{k=i}^{j} p_X(x_k)$</span>
+                                </div>
+                            </figure>
+                            <figure class="concept-figure">
+                                <img src="images/cmf.png" alt="CMF graph example">
+                                <figcaption>주사위의 각 눈보다 같거나 작은 눈이 나올 확률값에 대한 CMF graph</figcaption>
+                                <div class="concept-figure-copy">
+                                    <span class="concept-figure-formula">- $F_X(x) = P(X \le x)$</span>
+                                    <span class="concept-figure-formula">- $P(a \le X \le b)=F(b)-F(a)$</span>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">연속형 (Continuous)</h3>
+                        <p class="body-text">
+                            연속 확률 변수 : 연속적인 값
+                            $$X \in \mathbb{R}$$
+                            연속 확률 분포 : 확률 밀도 함수(PDF)
+                            $$f_X(x)=P(X=x)  →  \int_{-\infty}^{\infty} f_X(x)\,dx=1$$
+                            확률 : <strong style="color: #2563eb;">확률 밀도 함수의 구간 적분값</strong>
+                            $$P(a \le X \le b) = \int_{a}^{b} f_X(x)\,dx$$
+                        </p>
+
+                        <h4 class="point-title">PDF (Probability Density Function)</h4>
+                        <p class="body-text">
+                            연속 확률 변수의 분포를 나타내는 함수가 $f_X(x)$임.<br>
+                            $P(a \le X \le b) = \int_{a}^{b} f_X(x)\,dx$
+                        </p>
+
+                        <h4 class="point-title">CDF (Cumulative Distribution Function)</h4>
+                        <p class="body-text">
+                            연속형 분포에서 확률 변수가 특정 값보다 작거나 같은 확률을 나타내는 함수가 $F_X(x)$임.<br>
+                            $F_X(x) = P(X \le x)$
+                        </p>
+
+                        <div class="concept-image-grid">
+                            <figure class="concept-figure">
+                                <img src="images/pdf.png" alt="PMF graph example">
+                                <figcaption>정규분포 $\mathcal{N}(0,1)$의 구간 [1, 2]를 가질 때의 PMF graph</figcaption>
+                                <div class="concept-figure-copy">
+                                    <span class="concept-figure-formula">- 모든 실숫값 $x$에 대해 $f_X(x) > 0$</span>
+                                    <span class="concept-figure-formula">- $\int_{-\infty}^{\infty} f_X(x)\,dx=1$</span>
+                                </div>
+                            </figure>
+                            <figure class="concept-figure">
+                                <img src="images/cdf.png" alt="CMF graph example">
+                                <figcaption>정규분포 $\mathcal{N}(0,1)$ 모든 구간에 대한 CMF graph</figcaption>
+                                <div class="concept-figure-copy">
+                                    <span class="concept-figure-formula">- $F_X(-\infty) = 0$</span>
+                                    <span class="concept-figure-formula">- $F_X(\infty) = 1$</span>
+                                </div>
+                            </figure>
+                        </div>
+
+                        <div class="special-block important">
+                            <span class="special-block-title">PDF와 CDF</span>
+                            <p>
+                                (PDF) $f_X(x) = \frac{dF_X(x)}{dx}$<br>
+                                (CDF) $F_X(x) = \int_{-\infty}^{x} f_X(x)\,dx$<br>
+                            </p>
+                        </div>
+
+                        <div class="special-block caution">
+                            <span class="special-block-title">PDF의 함숫값은 확률 아닙니다</span>
+                            <p>
+                                연속 확률 분포에서 $f_X(x)$의 값 자체는 확률이 아님.
+                                확률 계산 기준은 구간의 넓이, 즉 적분값임.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 id="section-4" class="section-title">4. 기댓값 정리</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">정의</h3>
+                        <p class="body-text">
+                            기댓값은 확률 변수에 대해, 그 확률 변수가 따르는 확률 분포를 기준으로 취한 평균임.<br>
+                            각 사건이 벌어졌을 때의 값과, 그 사건이 벌어질 확률을 곱한 것을 전체 사건에 대해 합한 값으로 이해할 수 있음.
+                        </p>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">수학적 정의</h3>
+                        <p class="body-text">
+                            보다 일반적으로는 확률 변수 $X$와 함수 $g(x)$에 대해
+                            $\mathbb{E}_{p(x)}[g(x)]$ 형태로 기댓값을 정의한다.
+                            여기서 $p(x)$는 가중치 역할을 하는 확률 분포이고, $g(x)$는 기댓값을 구하고 싶은 함수임.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">GENERAL FORM</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$\mathbb{E}_{p(x)}[g(x)]$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                $p(x)$ : PMF 또는 PDF로 주어지는 가중치<br>
+                                $g(x)$ : 기댓값을 구하고 싶은 함수 ($x$축에서의 함수)
+                            </div>
+                        </div>
+
+                        <h4 class="point-title">이산 확률 변수</h4>
+                        <div class="math-box">
+                            <div class="math-box-label">DISCRETE</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$\mathbb{E}_{p(x)}[g(x)] = \sum_x g(x)P(X=x)$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                $g(x)$ : 이산 확률 변수에 대한 함수<br>
+                                $p(x)$ : $P(X=x)$, 즉 확률 질량 함수(PMF)
+                            </div>
+                        </div>
+
+                        <h4 class="point-title">연속 확률 변수</h4>
+                        <div class="math-box">
+                            <div class="math-box-label">CONTINUOUS</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$\mathbb{E}_{p(x)}[g(x)] = \int_{-\infty}^{\infty} g(x)f_X(x)\,dx$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                $g(x)$ : 연속 확률 변수에 대한 함수<br>
+                                $p(x)$ : $f_X(x)$, 즉 확률 밀도 함수(PDF)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">특징</h3>
+                        <p class="body-text">
+                            기댓값은 선형성을 가지기 때문에 복잡한 식을 단순하게 다룰 때 매우 자주 쓰임.
+                            특히 상수항 분리와 합의 기댓값 계산이 직관적으로 정리됨.
+                        </p>
+
+                        <h4 class="point-title">동차성</h4>
+                        <div class="math-box">
+                            <div class="math-box-label">LINEARITY</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $\mathbb{E}[aX+b] = a\mathbb{E}[X] + b$
+                            </div>
+                        </div>
+
+                        <h4 class="point-title">가산성</h4>
+                        <div class="math-box">
+                            <div class="math-box-label">LINEARITY</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$
+                            </div>
+                        </div>
+
+                        <div class="special-block important">
+                            <span class="special-block-title">핵심</span>
+                            <p>
+                                기댓값의 선형성은 보통 독립성과 무관하게 성립함.
+                                그래서 확률 변수의 합이나 변형된 함수의 평균을 다룰 때 기본 도구가 됨.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">Monte Carlo</h3>
+                        <p class="body-text">
+                            연속 확률 변수 $z \sim p(z)$일 때 함수 $f(z)$의 기댓값은 적분으로 정의됨.
+                            하지만 적분이 어렵다면, 분포 $p(z)$에서 표본을 뽑아 평균으로 근사하는 Monte Carlo 방법을 사용함.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">EXPECTATION</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$\mathbb{E}_{z \sim p(z)}[f(z)] = \int f(z)p(z)\,dz$$
+                            </div>
+                        </div>
+
+                        <p class="body-text">
+                            샘플 $z^{(1)}, z^{(2)}, \cdots, z^{(N)} \sim p(z)$를 추출하면,
+                            이 기댓값은 표본 평균으로 근사할 수 있음.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">MONTE CARLO ESTIMATE</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$\mathbb{E}_{z \sim p(z)}[f(z)] \approx \frac{1}{N}\sum_{n=1}^{N} f\bigl(z^{(n)}\bigr)$$
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="section-5" class="section-title">5. 우도</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">기본 개념</h3>
+                        <p class="body-text">
+                            모수(parameter) $\theta$는 모집단의 확률 분포 형태를 결정하는 값임.<br>
+                            확률 분포(distribution)는 확률 변수가 어떤 값을 가질지에 대한 확률 규칙임.<br>
+                            확률론에서는 $p(x)$를 이미 $\theta$가 주어진 상태의 분포로 봄.
+                            즉, 특정 확률 모형 $\theta$가 주어졌을 때 $x$가 나올 확률을 $p(x \mid \theta)$로 표현함.
+                        </p>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">Probability (확률)</h3>
+                        <p class="body-text">
+                            확률은 분포 $\theta$가 주어졌을 때, 관측값 $(x_1, x_2, \dots)$이 나올 가능성을 보는 관점임.
+                            이때는 $\theta$를 고정하고 $x$를 랜덤하게 봄.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">PROBABILITY</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$p(x \mid \theta) = p_\theta(x)$$
+                            </div>
+                        </div>
+
+                        <div class="special-block example">
+                            <span class="special-block-title">주사위 예시</span>
+                            <p>
+                                표본 공간: $\Omega = \{1,2,3,4,5,6\}$<br>
+                                파라미터 $\theta$: 공정 주사위라는 확률 분포 고정<br>
+                                관측 사건 $x$: 1부터 6 중 한 개의 숫자<br>
+                                예를 들어 공정 주사위에서 2가 나올 확률은 $\frac{1}{6}$임.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">Likelihood (우도)</h3>
+                        <p class="body-text">
+                            우도는 관측값 $x$가 이미 주어졌을 때, 어떤 모수 $\theta$가 이 데이터를 더 잘 설명하는지를 보는 관점임.
+                            즉, 이번에는 $x$를 고정하고 $\theta$를 바꿔 가며 비교함.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">LIKELIHOOD</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$L(\theta \mid x) := p(x \mid \theta) = p_\theta(x)$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                관측값 $x$가 주어졌을 때, 현재의 모수 $\theta$가 이 고정된 데이터를 만들어냈을 점수처럼 해석함.
+                            </div>
+                        </div>
+
+                        <div class="special-block example">
+                            <span class="special-block-title">주사위 예시</span>
+                            <p>
+                                표본 공간: $\Omega = \{1,2,3,4,5,6\}$<br>
+                                파라미터 $\theta_1$: 공정 주사위<br>
+                                파라미터 $\theta_2$: 2가 잘 나오는 주사위<br>
+                                파라미터 $\theta_3$: 확률 분포가 또 다른 주사위<br>
+                                관측 사건 $x=2$가 이미 나왔다고 고정하면, 이제는 어떤 $\theta$가 이 데이터를 가장 그럴듯하게 설명하는지 비교함.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">$p(x \mid \theta)$의 관점</h3>
+                        <p class="body-text">
+                            같은 식 $p(x \mid \theta)$라도 무엇을 고정하느냐에 따라 해석이 달라짐.<br>
+                            이산 확률 분포에서는 확률로 보면 $p(x \mid \theta)$가 조건부 확률이 됨.<br>
+                            반대로 우도로 보면 $x$를 하나로 고정한 상태에서 PMF 값 또는 PDF 값을 비교하는 관점이 됨.
+                        </p>
+
+                        <h4 class="point-title">이산 확률 분포</h4>
+                        <p class="body-text">
+                            확률로 보면 $p(x \mid \theta)$는 조건부 확률로 해석함.<br>
+                            우도로 보면 관측값 $x$를 고정한 상태에서 각 $\theta$에 대한 PMF 값을 비교하는 것임.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">DISCRETE VIEW</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$P(a \le X \le b) = \sum_x P_X(x)$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                우도 관점에서는 $x$를 1개로 고정하고 $p(x \mid \theta)$ 값을 비교함.
+                            </div>
+                        </div>
+
+                        <h4 class="point-title">연속 확률 분포</h4>
+                        <p class="body-text">
+                            연속 확률 분포에서도 확률로 보면 $p(x \mid \theta)$는 구간 적분으로 해석함.<br>
+                            우도로 보면 특정 관측값 $x$를 고정하고 PDF 값을 비교하는 관점임.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">CONTINUOUS VIEW</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$P(a \le X \le b) = \int_a^b f_X(x)\,dx$$
+                            </div>
+                            <div class="math-box-content math-box-content--body">
+                                우도 관점에서는 $x$를 1개로 고정하고 $p(x \mid \theta)$ 또는 $f_X(x)$ 값을 비교함.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">Maximum Likelihood</h3>
+                        <p class="body-text">
+                            최대우도추정은 여러 모수 $\theta_1, \theta_2, \theta_3, \dots$를 비교하면서
+                            현재 데이터를 만들어냈을 점수가 가장 높은 모수를 찾는 방법임.
+                            고정된 데이터를 기준으로 $\theta$를 바꾸어 모집단의 모수를 추정하는 절차임.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">MLE</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$\theta^* = \arg\max_{\theta} \log p_\theta(x)$$
+                            </div>
+                        </div>
+
+                        <div class="special-block summary">
+                            <span class="special-block-title">해석</span>
+                            <ul class="simple-list">
+                                <li><strong>비교 대상:</strong> 여러 후보 모수 $\theta$들임.</li>
+                                <li><strong>고정 대상:</strong> 현재 관측된 데이터 $x$임.</li>
+                                <li><strong>목표:</strong> likelihood가 가장 높은 $\theta$를 찾는 것임.</li>
+                                <li><strong>결론:</strong> 우도를 최대화하면 모집단의 모수와 가장 유사한 후보를 고르게 됨.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">고찰</h3>
+                        <p class="body-text">
+                            관측 사건 $x=2$에 대해 $\theta_2$가 가장 높은 우도를 가진다면,
+                            현재 주어진 데이터는 $\theta_2$ 아래에서 나왔을 가능성이 가장 높다고 해석할 수 있음.
+                            즉, 같은 데이터가 주어졌을 때 어떤 모수가 가장 그럴듯한지를 판단하는 기준이 바로 우도임.
+                        </p>
+
+                        <div class="special-block summary">
+                            <span class="special-block-title">활용</span>
+                            <ul class="simple-list">
+                                <li><strong>모수 추정:</strong> 최대우도추정(MLE)의 기본 기준.</li>
+                                <li><strong>모형 비교:</strong> 어떤 가정이 데이터를 더 잘 설명하는지 판단.</li>
+                                <li><strong>통계 추론:</strong> 회귀, 분류, 베이지안 추론과 자연스럽게 연결.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <footer class="footer">문서 끝.</footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="assets/js/site-shell.js"></script>
+    <script src="assets/js/knowledge-article.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문서 제목</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="assets/css/common-hero.css">
+    <link rel="stylesheet" href="assets/css/knowledge-article.css">
+</head>
+<body>
+    <div
+        data-include="partials/hero-banner.html"
+        data-hero-subtitle="문서 성격에 맞는 한 줄 설명"
+    ></div>
+
+    <div class="article-layout">
+        <aside class="article-sidebar" aria-label="문서 목록" data-include="partials/article-sidebar.html"></aside>
+
+        <main class="article-main">
+            <div class="tistory-post-wrapper">
+                <div class="article-topbar">
+                    <nav class="topic-nav" aria-label="주제 네비게이션">
+                        <a href="#section-1">1. 첫 번째 섹션</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-2">2. 두 번째 섹션</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-3">3. 세 번째 섹션</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-4">4. 네 번째 섹션</a>
+                        <span class="topic-separator">|</span>
+                        <a href="#section-5">5. 다섯 번째 섹션</a>
+                    </nav>
+                </div>
+
+                <span class="meta-text">Category: Mathematics / Probability / Statistics</span>
+                <h1 class="post-title">문서 제목</h1>
+                <p class="meta-text">작성일: YYYY. MM. DD</p>
+
+                <article>
+                    <p class="body-text">
+                        문서 전체를 소개하는 짧은 도입 문단을 적습니다.
+                    </p>
+
+                    <h2 id="section-1" class="section-title">1. 첫 번째 섹션</h2>
+                    <p class="body-text">
+                        섹션 전체를 여는 설명 문단입니다.
+                    </p>
+
+                    <p class="body-text">
+                        First line example.<br>
+                        Second line keeps the same 10px left spacing.
+                    </p>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">첫 번째 Concept</h3>
+
+                        <h4 class="point-title">첫 번째 Point</h4>
+                        <p class="body-text">
+                            Point 설명 문장입니다.
+                        </p>
+
+                        <div class="math-box">
+                            <div class="math-box-label">FORMULA</div>
+                            <div class="math-box-content math-box-content--formula">
+                                $$x + y = z$$
+                            </div>
+                        </div>
+
+                        <div class="special-block important">
+                            <span class="special-block-title">중요한 메모</span>
+                            <p>
+                                반드시 기억할 내용을 적습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 id="section-2" class="section-title">2. 두 번째 섹션</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">두 번째 Concept</h3>
+                        <p class="body-text">
+                            Concept 설명 문단입니다.
+                        </p>
+
+                        <div class="special-block example">
+                            <span class="special-block-title">예시 제목</span>
+                            <p>
+                                예시 상황이나 계산 예시를 적습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">같은 Section 안의 다음 Concept</h3>
+                        <p class="body-text">
+                            Concept이 연달아 이어질 때는 concept-group 사이 간격이 더 크게 적용됩니다.
+                        </p>
+
+                        <h4 class="point-title">그래프 Point</h4>
+                        <p class="body-text">
+                            그래프나 도표를 나란히 둘 때는 아래처럼 `concept-image-grid`를 사용합니다.
+                        </p>
+
+                        <div class="concept-image-grid">
+                            <figure class="concept-figure">
+                                <img src="images/pmf.png" alt="예시 그래프 1">
+                                <figcaption>첫 번째 그래프 설명</figcaption>
+                                <div class="concept-figure-copy">
+                                    <span class="concept-figure-formula">$p_X(x)=P(X=x)$</span>
+                                    <span class="concept-figure-formula">$\sum_x p_X(x)=1$</span>
+                                </div>
+                            </figure>
+                            <figure class="concept-figure">
+                                <img src="images/cmf.png" alt="예시 그래프 2">
+                                <figcaption>두 번째 그래프 설명</figcaption>
+                                <div class="concept-figure-copy">
+                                    <span class="concept-figure-formula">$F_X(x)=P(X \le x)$</span>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <h2 id="section-3" class="section-title">3. 세 번째 섹션</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">세 번째 Concept</h3>
+
+                        <h4 class="point-title">핵심 Point</h4>
+                        <p class="body-text">
+                            핵심 내용을 적습니다.
+                        </p>
+
+                        <div class="special-block summary">
+                            <span class="special-block-title">요약 제목</span>
+                            <ul class="simple-list">
+                                <li>핵심 정리 1</li>
+                                <li>핵심 정리 2</li>
+                                <li>핵심 정리 3</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2 id="section-4" class="section-title">4. 네 번째 섹션</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">네 번째 Concept</h3>
+                        <p class="body-text">
+                            설명 문단입니다.
+                        </p>
+
+                        <div class="special-block caution">
+                            <span class="special-block-title">주의 제목</span>
+                            <p>
+                                헷갈리기 쉬운 점이나 해석상 주의를 적습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 id="section-5" class="section-title">5. 다섯 번째 섹션</h2>
+
+                    <div class="concept-group">
+                        <h3 class="concept-title">다섯 번째 Concept</h3>
+                        <p class="body-text">
+                            마지막 정리 문단입니다.
+                        </p>
+                    </div>
+                </article>
+
+                <footer class="footer">문서 끝.</footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="assets/js/site-shell.js"></script>
+    <script src="assets/js/knowledge-article.js"></script>
+</body>
+</html>
